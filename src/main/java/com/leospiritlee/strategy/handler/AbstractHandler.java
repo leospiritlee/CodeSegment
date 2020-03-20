@@ -13,4 +13,8 @@ public abstract class AbstractHandler {
 
     protected abstract void handler(BaseReqDto baseReqDto);
 
+    public void facade(BaseReqDto baseReqDto){
+        handler(baseReqDto);
+    }
+
 }

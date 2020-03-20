@@ -16,6 +16,6 @@ public class Handler_A extends AbstractHandler{
 
     @Override
     protected void handler(BaseReqDto baseReqDto) {
-
+        System.out.println("Handler_A handler");
     }
 }
