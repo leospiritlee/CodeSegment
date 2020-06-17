@@ -30,6 +30,14 @@ public class Tmp {
         System.out.println("count: " + Arrays.asList(count));
         System.out.println("sum: " + Arrays.asList(sum));
 
+        int sumTotal = 0;
+        int countTotal = 0;
+        for(int i = 1, n = 100; i<= n; i++){
+            sumTotal += i;
+            countTotal++;
+        }
+        System.out.println(sumTotal);
+        System.out.println(countTotal);
     }
 
     private void count(Integer[] count, BigDecimal[] sum){
