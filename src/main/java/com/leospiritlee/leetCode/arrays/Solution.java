@@ -35,6 +35,35 @@ public class Solution {
 
     }
 
+
+    public int minCount(int[] coins) {
+
+        if(null == coins){
+            return 0;
+        }
+
+        int total = 0;
+
+        for(int coin : coins){
+            if(coin % 2 ==0){
+                total += coin/2;
+            }else{
+                total += coin/2 +1;
+            }
+        }
+
+        return total;
+    }
+
+    public int maxDepth(TreeNode root) {
+        return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+
+    public static void deleteNode_(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
     public int[] createTargetArray(int[] nums, int[] index) {
         int target[] = new int[nums.length];
 
@@ -382,10 +411,7 @@ public class Solution {
         return guessTime;
     }
 
-    public static void deleteNode(ListNode node) {
-        node.val = node.next.val;
-        node.next = node.next.next;
-    }
+
 
 
     public static String reverseLeftWords(String s, int n) {
