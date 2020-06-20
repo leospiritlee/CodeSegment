@@ -1,8 +1,12 @@
 package com.leospiritlee.leetCode.arrays;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -28,11 +32,195 @@ public class Solution {
 
 //        System.out.println(solution.findBestValue(n, target));
 
-        int[] nums = new int[]{1};
+        int[] nums = new int[]{3,4,5,2};
         int[] index = new int[]{0};
 
-        System.out.println(Arrays.toString(solution.createTargetArray(nums,index)));
+//        System.out.println(Arrays.toString(solution.createTargetArray(nums,index)));
+        System.out.println(maxProduct(nums));
+    }
 
+
+    public int[] reversePrint(ListNode head) {
+        ListNode current = head;
+        int len = 0;
+        while (current != null){
+            len++;
+            current = current.next;
+        }
+
+        int[] nums = new int[len];
+
+        current = head;
+        while (current != null){
+            nums[len -1] = current.val;
+            len--;
+            current = current.next;
+        }
+
+        return nums;
+    }
+
+    public int maximum69Number (int num) {
+
+        String beginS = String.valueOf(num).replaceFirst("6", "9");
+
+        return Integer.parseInt(beginS);
+    }
+
+
+
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if(t1 == null){
+            return t2;
+        }
+        if(t2 == null){
+            return  t1;
+        }
+
+        t1.val += t2.val;
+        t1.left = mergeTrees(t1.left, t2.left);
+        t1.right = mergeTrees(t1.right, t2.right);
+        return t1;
+    }
+
+
+
+    public int kthToLast_(ListNode head, int k) {
+        ListNode p = head;
+        for(int i = 0; i < k; i++){
+            p =p.next;
+        }
+
+        while (p != null){
+            p = p.next;
+            head = head.next;
+        }
+
+        return head.val;
+    }
+
+
+    public int kthToLast(ListNode head, int k) {
+        List<Integer> headList = new ArrayList<>();
+
+        while (head != null){
+            headList.add(head.val);
+            head = head.next;
+        }
+
+        return headList.get(headList.size()-k);
+    }
+
+
+    public static int balancedStringSplit(String s) {
+        int cnt = 0;
+        int poise = 0;
+
+        char[] arrayC = s.toCharArray();
+
+        for(char c : arrayC){
+           switch (c){
+               case 'L':
+                   poise--;
+                   break;
+               case 'R':
+                   poise++;
+                   break;
+               default:
+                   break;
+           }
+
+           if(poise == 0){
+               cnt++;
+           }
+
+        }
+
+
+        return cnt;
+    }
+
+
+    public static int maxProduct(int[] nums) {
+        int size = nums.length;
+        int firstNum = nums[0];
+        int secondNum = nums[1];
+
+        for(int i = 2; i < size; i++){
+            if(firstNum > secondNum){
+                if(nums[i] > secondNum){
+                    secondNum = nums[i];
+                }
+            }else{
+                if(nums[i] > firstNum){
+                    firstNum = nums[i];
+                }
+            }
+        }
+
+
+        return (firstNum -1) * (secondNum -1);
+    }
+
+
+    public int getDecimalValue(ListNode head) {
+
+        if(head == null){
+            return 0;
+        }
+        int decimal = 0;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        while (head != null){
+            stringBuilder.append(head.val);
+            decimal = decimal * 2 + head.val;
+            head = head.next;
+        }
+
+        System.out.println(decimal);
+
+        return (int) Long.parseLong(stringBuilder.toString() , 2);
+    }
+
+
+
+    /**
+     *  0  0
+     *  1  1
+     *  2  11
+     *  3  111
+     *  4  1111
+     *
+     * @param n
+     * @return
+     */
+    public int[] printNumbers(int n) {
+
+
+        if(n == 0){
+            return null;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int i = 1;
+
+        while (i <= n){
+            stringBuilder.append(1);
+            i++;
+        }
+
+        Integer tmpIn = Integer.valueOf(stringBuilder.toString());
+
+        int size = tmpIn * 9;
+
+        int[] nums = new int[size];
+
+        for(int k = 0; k < size; k++){
+            nums[k] = k + 1;
+        }
+
+        return nums;
     }
 
 
