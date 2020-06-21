@@ -32,13 +32,69 @@ public class Solution {
 
 //        System.out.println(solution.findBestValue(n, target));
 
-        int[] nums = new int[]{3,4,5,2};
+        int[] nums1 = new int[]{1,2,3,0,0,0};
+        int[] nums2 = new int[]{2,5,6};
         int[] index = new int[]{0};
 
 //        System.out.println(Arrays.toString(solution.createTargetArray(nums,index)));
-        System.out.println(maxProduct(nums));
+        System.out.println(generate(3));
+//        merge(nums1,3,nums2,3);
     }
 
+    public static List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+        for(int i = 0; i < numRows; i++){
+            List<Integer> array = new ArrayList<Integer>();
+            for(int j = 0; j <= i; j++){
+                if(j == 0 || j == i){
+                    array.add(1);
+                }else{
+                    array.add(ans.get(i-1).get(j-1) + ans.get(i-1).get(j));
+                }
+            }
+            ans.add(array);
+        }
+        return ans;
+
+    }
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        System.arraycopy(nums2, 0, nums1, m, n);
+        Arrays.sort(nums1);
+    }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode current = head;
+        while (current != null && current.next != null){
+            if(current.next.val == current.val){
+                current.next = current.next.next;
+            }else {
+                current = current.next;
+            }
+        }
+        return head;
+    }
+
+    int maxSum = Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        maxGain(root);
+        return maxSum;
+    }
+
+    private int maxGain(TreeNode treeNode){
+        if(treeNode == null){
+            return 0;
+        }
+
+        int leftGain = Math.max(maxGain(treeNode.left), 0);
+        int rightGain = Math.max(maxGain(treeNode.right), 0);
+
+        int newValue = treeNode.val + leftGain + rightGain;
+        maxSum = Math.max(newValue , maxSum);
+
+        return treeNode.val + Math.max(leftGain, rightGain);
+    }
 
     public int[] reversePrint(ListNode head) {
         ListNode current = head;
